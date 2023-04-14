@@ -1,7 +1,8 @@
+use serde::{Deserialize, Serialize};
 use std::env;
 use std::process::exit;
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 struct FiniteAutomaton {
     adjacency_list: Vec<(u16, u16, char)>,
     final_states: Vec<u16>,
@@ -40,6 +41,7 @@ fn run_automaton(finite_automaton: FiniteAutomaton, user_string: &str) {
 
         if matched_adjacency == None {
             has_not_defined_step = true;
+            break;
         } else {
             let next_state = matched_adjacency.unwrap().1;
             current_state = next_state;
@@ -62,5 +64,8 @@ fn main() {
         exit(1);
     }
     let user_string: &String = &args[1];
-    run_automaton(build_finite_automaton(), user_string);
+    let finite_automaton = build_finite_automaton();
+    let serialized = serde_json::to_string(&finite_automaton).unwrap();
+    println!("Serialized FA = {}", serialized);
+    run_automaton(finite_automaton, user_string);
 }

@@ -60,11 +60,12 @@ fn run_automaton(finite_automaton: FiniteAutomaton, user_string: &str) {
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
-        println!("Please add source");
+        println!("Please add sauce");
         exit(1);
     }
     let user_string: &String = &args[1];
-    let finite_automaton = build_finite_automaton();
+    // let finite_automaton = build_finite_automaton();
+    let finite_automaton = serde_json::from_str(r#"{"adjacency_list":[[0,1,"0"],[1,2,"B"],[1,2,"b"],[2,3,"0"],[2,3,"1"],[3,3,"0"],[3,3,"1"]],"final_states":[3]}"#).unwrap();
     let serialized = serde_json::to_string(&finite_automaton).unwrap();
     println!("Serialized FA = {}", serialized);
     run_automaton(finite_automaton, user_string);

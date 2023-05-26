@@ -29,3 +29,5 @@ module Test
 end
 
 # if (3 == 2) print(3); else print(2);
+
+# @value = !!(value)

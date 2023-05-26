@@ -44,7 +44,7 @@ rule
     | NUM
       { Numeral.new(val[0]) }
     | BOOL
-      { TruthValue.new(val[0]) }
+      { val[0] ? $trueValue : $falseValue }
     | '-' exp =UMINUS
       { Minus.new(val[1]) }
     | '!' exp

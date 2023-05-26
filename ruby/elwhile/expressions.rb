@@ -264,7 +264,7 @@ end
 # Boolean expressions __________________________________________________________
 
 # Representation of boolean literals, e.g. `(true)`.
-class TruthValue < Expression
+class TruthValue < Expression  
   def initialize(value)
     @value = !!(value)
   end
@@ -275,6 +275,8 @@ class TruthValue < Expression
     @value
   end
 end
+$trueValue = TruthValue.new(true)
+$falseValue = TruthValue.new(false)
 
 # Representation of logical negation expressions, like `(!right)`.
 class Negation < Expression

@@ -58,6 +58,10 @@ class Minus < Expression
     @right = right
   end
 
+  def unparse()
+    "-#{@value}"
+  end
+
   def evaluate(state)
     -@right.evaluate(state)
   end
@@ -155,7 +159,7 @@ class ComparisonEqual < Expression
   end
 
   def evaluate(state)
-    @left.evaluate(state) + @right.evaluate(state)
+    @left.evaluate(state) == @right.evaluate(state)
   end
 
   attr_reader :left
@@ -292,6 +296,10 @@ class LogicalAnd < Expression
     @right = right
   end
 
+  def unparse()
+    "#{@left.unparse()} && #{@right.unparse()}"
+  end
+
   def evaluate(state = {})
     @right.evaluate(state) && @left.evaluate(state)
   end
@@ -305,6 +313,10 @@ class LogicalOr < Expression
   def initialize(left, right)
     @left = left
     @right = right
+  end
+
+  def unparse()
+    "#{@left.unparse()} || #{@right.unparse()}"
   end
 
   def evaluate(state = {})

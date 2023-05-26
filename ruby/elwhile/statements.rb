@@ -24,6 +24,10 @@ class Assignment < Statement
     @expression = expression
   end
 
+  def unparse()
+    "#{@identifier} = #{@expression.unparse()}"
+  end
+
   def evaluate(state)
     state[@identifier] = @expression.evaluate(state)
     state
@@ -37,6 +41,10 @@ end
 class Block < Statement
   def initialize(statements = [])
     @statements = statements
+  end
+
+  def unparse()
+    "#{@statements.unparse()}"
   end
 
   def evaluate(state)
@@ -57,7 +65,13 @@ class IfThenElse < Statement
     @bodyElse = bodyElse
   end
 
+  def unparse()
+    "if (#{@condition.unparse()}) then #{@bodyThen.unparse()} else #{@bodyElse.unparse()}"
+  end
+
   def evaluate(state)
+    puts "Evaluate"
+    puts @condition.evaluate(state)
     if(@condition.evaluate(state)) 
       @bodyThen.evaluate(state)
     else
@@ -77,6 +91,11 @@ class WhileDo < Statement
     @body = body 
   end
 
+  def unparse()
+    puts @bodyThen;
+    "while (#{@condition.unparse()}) then #{@body.unparse()}"
+  end
+
   def evaluate(state)
     while(@condition.evaluate(state))
       state = @body.evaluate(state)
@@ -92,6 +111,10 @@ end
 class PrintStmt < Statement
   def initialize(expression)
     @expression = expression
+  end
+
+  def unparse()
+    "print(#{@expression.unparse()})"
   end
 
   def evaluate(state)

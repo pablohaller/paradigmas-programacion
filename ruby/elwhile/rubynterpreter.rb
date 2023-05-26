@@ -1,3 +1,4 @@
+require_relative 'test'
 require_relative 'expressions'
 require_relative 'statements'
 require_relative 'parser'
@@ -8,6 +9,17 @@ puts ""
 parser = Parser.new
 input = []
 state = {}
+
+Test.tests.map do |n|
+  puts "Test:"
+  puts n
+  puts "\nResult:\n"
+  ast = parser.parse_string(n)
+  puts ast.unparse
+  puts ast.evaluate(state)
+  puts "\n--------------"
+end 
+
 ARGF.each do |line|
   if (line.strip().empty?)
     code = input.join('\n')

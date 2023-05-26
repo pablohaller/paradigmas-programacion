@@ -274,9 +274,18 @@ class TruthValue < Expression
   def evaluate(state = {})
     @value
   end
+
+  def self.trueValue
+    class_variable_get(:@@trueValue)
+  end
+
+  def self.falseValue
+    class_variable_get(:@@falseValue)
+  end
 end
-$trueValue = TruthValue.new(true)
-$falseValue = TruthValue.new(false)
+
+TruthValue.class_variable_set(:@@trueValue, TruthValue.new(true))
+TruthValue.class_variable_set(:@@falseValue, TruthValue.new(false))
 
 # Representation of logical negation expressions, like `(!right)`.
 class Negation < Expression

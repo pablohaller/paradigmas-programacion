@@ -399,7 +399,7 @@ module_eval(<<'.,.,', 'parser.racc', 44)
 
 module_eval(<<'.,.,', 'parser.racc', 46)
   def _reduce_14(val, _values)
-     val[0] ? $trueValue : $falseValue
+     val[0] ? TruthValue.trueValue : TruthValue.falseValue
   end
 .,.,
 

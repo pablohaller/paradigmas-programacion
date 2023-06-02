@@ -18,7 +18,7 @@ Test.tests.map do |n|
   puts ast.unparse
   puts ast.evaluate(state)
   puts "\n--------------"
-end 
+end
 
 ARGF.each do |line|
   if (line.strip().empty?)

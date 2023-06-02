@@ -28,12 +28,14 @@ rule
     | 'if' '(' exp ')' stmt 'else' stmt
       { IfThenElse.new(val[2], val[4], val[6]) }
     | 'if' '(' exp ')' stmt
-      { IfThenElse.new(val[2], val[4], nil) }
+      { IfOnly.new(val[2], val[4]) }
     | 'while' '(' exp ')' stmt
       { WhileDo.new(val[2], val[4]) }
+    | 'do' stmt 'until' '(' exp ')'
+      { DoUntil.new(val[1], val[4]) }
     | 'print' '(' exp ')' ';'
       { PrintStmt.new(val[2]) }
-  stmts 
+  stmts
     : stmt
       { [val[0]] }
     | stmts stmt
@@ -87,11 +89,11 @@ require_relative 'statements'
 class Lexer
   NUMBER = /\d+(\.\d+)?/
   BOOL = /true|false/
-  KEYWORDS = /if|else|while|print/
+  KEYWORDS = /if|else|while|print|do|until/
   ID = /[a-zA-Z_]\w*/
   OPERS = /[-+*\/(){};]|[!=<>]=?|&&|\|\|/
   IGNORE = /(\/\/.*(\n|$)|\s)+/
-  
+
   def initialize(input)
     @ss = StringScanner.new(input)
   end

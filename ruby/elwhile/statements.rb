@@ -18,7 +18,7 @@ class Statement
 end
 
 # Representation of assignments, e.g. `identifier = expression;`.
-class Assignment < Statement 
+class Assignment < Statement
   def initialize(identifier, expression)
     @identifier = identifier
     @expression = expression
@@ -44,7 +44,7 @@ class Block < Statement
   end
 
   def unparse()
-    "#{@statements.unparse()}"
+    "#{ @statements.map{ | statement | statement.unparse() }.join(",") }"
   end
 
   def evaluate(state)
@@ -72,7 +72,7 @@ class IfThenElse < Statement
   def evaluate(state)
     puts "Evaluate"
     puts @condition.evaluate(state)
-    if(@condition.evaluate(state)) 
+    if(@condition.evaluate(state))
       @bodyThen.evaluate(state)
     else
       @bodyElse.evaluate(state)
@@ -84,11 +84,33 @@ class IfThenElse < Statement
   attr_reader :bodyElse
 end
 
+class IfOnly < Statement
+  def initialize(condition, bodyThen)
+    @condition = condition
+    @bodyThen = bodyThen
+  end
+
+  def unparse()
+    "if (#{@condition.unparse()}) then #{@bodyThen.unparse()}"
+  end
+
+  def evaluate(state)
+    puts "Evaluate"
+    puts @condition.evaluate(state)
+    if(@condition.evaluate(state))
+      @bodyThen.evaluate(state)
+    end
+  end
+
+  attr_reader :condition
+  attr_reader :bodyThen
+end
+
 # Representation of conditional statements, e.g. `while (condition) body`.
 class WhileDo < Statement
   def initialize (condition, body)
     @condition = condition
-    @body = body 
+    @body = body
   end
 
   def unparse()
@@ -101,6 +123,32 @@ class WhileDo < Statement
       state = @body.evaluate(state)
     end
     state
+  end
+
+  attr_reader :condition
+  attr_reader :body
+end
+
+# Representation of conditional statements, e.g. `while (condition) body`.
+class DoUntil < Statement
+  def initialize (body, condition)
+    @condition = condition
+    @body = body
+  end
+
+  def unparse()
+    puts @bodyThen;
+    "Do (#{@body.unparse()}) until #{@condition.unparse()}"
+  end
+
+  def evaluate(state)
+    puts state
+    state = @body.evaluate(state)
+    if (@condition.evaluate(state))
+        return state
+    else
+        return @body.evaluate(state)
+    end
   end
 
   attr_reader :condition

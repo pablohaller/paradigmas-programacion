@@ -28,12 +28,15 @@ rule
     | 'if' '(' exp ')' stmt 'else' stmt
       { IfThenElse.new(val[2], val[4], val[6]) }
     | 'if' '(' exp ')' stmt
-      { IfThenElse.new(val[2], val[4], nil) }
+      { IfOnly.new(val[2], val[4]) }
     | 'while' '(' exp ')' stmt
       { WhileDo.new(val[2], val[4]) }
+    | 'do' stmt 'until' '(' exp ')'
+      { DoUntil.new(val[1], val[4]) }
     | 'print' '(' exp ')' ';'
       { PrintStmt.new(val[2]) }
-  stmts 
+
+  stmts
     : stmt
       { [val[0]] }
     | stmts stmt
@@ -44,7 +47,7 @@ rule
     | NUM
       { Numeral.new(val[0]) }
     | BOOL
-      { TruthValue.new(val[0]) }
+      { val[0] ? TruthValue.trueValue : TruthValue.falseValue }
     | '-' exp =UMINUS
       { Minus.new(val[1]) }
     | '!' exp
@@ -75,6 +78,15 @@ rule
       { LogicalOr.new(val[0], val[2]) }
     | '(' exp ')'
       { val[1] }
+    | ID '('  ')'
+      { FunctionCall.new(val[0], []) }
+    | ID '(' args ')'
+      { FunctionCall.new(val[0], val[2]) }
+  args
+    : exp
+      { [val[0]] }
+    | args ',' exp
+      { val[0].push(val[2]) }
 
 end
 
@@ -87,11 +99,11 @@ require_relative 'statements'
 class Lexer
   NUMBER = /\d+(\.\d+)?/
   BOOL = /true|false/
-  KEYWORDS = /if|else|while|print/
+  KEYWORDS = /if|else|while|print|do|until/
   ID = /[a-zA-Z_]\w*/
-  OPERS = /[-+*\/(){};]|[!=<>]=?|&&|\|\|/
+  OPERS = /[-+*\/(){};,]|[!=<>]=?|&&|\|\|/
   IGNORE = /(\/\/.*(\n|$)|\s)+/
-  
+
   def initialize(input)
     @ss = StringScanner.new(input)
   end

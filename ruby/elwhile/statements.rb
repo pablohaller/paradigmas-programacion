@@ -44,7 +44,7 @@ class Block < Statement
   end
 
   def unparse()
-    "#{@statements.unparse()}"
+    "#{ @statements.map{ | statement | statement.unparse() }.join(",") }"
   end
 
   def evaluate(state)

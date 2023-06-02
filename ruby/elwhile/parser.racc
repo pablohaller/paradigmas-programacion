@@ -35,6 +35,7 @@ rule
       { DoUntil.new(val[1], val[4]) }
     | 'print' '(' exp ')' ';'
       { PrintStmt.new(val[2]) }
+
   stmts
     : stmt
       { [val[0]] }
@@ -77,6 +78,15 @@ rule
       { LogicalOr.new(val[0], val[2]) }
     | '(' exp ')'
       { val[1] }
+    | ID '('  ')'
+      { FunctionCall.new(val[0], []) }
+    | ID '(' args ')'
+      { FunctionCall.new(val[0], val[2]) }
+  args
+    : exp
+      { [val[0]] }
+    | args ',' exp
+      { val[0].push(val[2]) }
 
 end
 
@@ -91,7 +101,7 @@ class Lexer
   BOOL = /true|false/
   KEYWORDS = /if|else|while|print|do|until/
   ID = /[a-zA-Z_]\w*/
-  OPERS = /[-+*\/(){};]|[!=<>]=?|&&|\|\|/
+  OPERS = /[-+*\/(){};,]|[!=<>]=?|&&|\|\|/
   IGNORE = /(\/\/.*(\n|$)|\s)+/
 
   def initialize(input)

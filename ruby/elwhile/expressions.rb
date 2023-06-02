@@ -89,12 +89,12 @@ class Addition < Expression
 end
 
 # Representation of subtraction expressions, like `(left - right)`.
-class Subtraction < Expression 
+class Subtraction < Expression
   def initialize(left, right)
     @left = left
     @right = right
   end
-  
+
   def unparse()
     "#{@left.unparse()} - #{@right.unparse()}"
   end
@@ -264,7 +264,7 @@ end
 # Boolean expressions __________________________________________________________
 
 # Representation of boolean literals, e.g. `(true)`.
-class TruthValue < Expression  
+class TruthValue < Expression
   def initialize(value)
     @value = !!(value)
   end
@@ -336,4 +336,22 @@ class LogicalOr < Expression
 
   attr_reader :left
   attr_reader :right
+end
+
+# Representation of FunctionCall`.
+class FunctionCall < Expression
+  def initialize(fun_name, arguments = [])
+    @fun_name = fun_name
+    @arguments = arguments
+  end
+
+  def unparse()
+    "#{@fun_name}(#{ @arguments.map{ | argument | argument.unparse() }.join(",") })"
+  end
+
+  def evaluate(state = {})
+  end
+
+  attr_reader :fun_name
+  attr_reader :arguments
 end

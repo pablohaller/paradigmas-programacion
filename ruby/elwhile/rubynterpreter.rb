@@ -16,7 +16,7 @@ Test.tests.map do |n|
   puts "\nResult:\n"
   ast = parser.parse_string(n)
   puts ast.unparse
-  puts ast.evaluate(state)
+  # puts ast.evaluate(state)
   puts "\n--------------"
 end
 
@@ -29,8 +29,8 @@ ARGF.each do |line|
     else
       begin
         ast = parser.parse_string(code)
-        # puts ast.unparse
-        puts ast.evaluate(state)
+        puts ast.unparse()
+        # puts ast.evaluate(state)
       rescue => error
         STDERR.puts "#{error.class}: #{error.message}"
       ensure

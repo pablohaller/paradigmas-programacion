@@ -275,6 +275,10 @@ class TruthValue < Expression
     @value
   end
 
+  def unparse()
+    "#{@value}"
+  end
+
   def self.trueValue
     class_variable_get(:@@trueValue)
   end

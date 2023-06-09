@@ -20,7 +20,13 @@ module Test
         'y = y / 3;',
         'while (y > 1) y = y - 1;',
         'print(y);',
-        'print(y*2);'
+        'print(y*2);',
+        'pi()',
+        'pow(2,2)',
+        'max(1,3,2)',
+        'min(3,1,2)',
+        'rand()',
+        'abs(-3)',
     ]
 
     def self.tests

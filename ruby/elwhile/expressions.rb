@@ -350,8 +350,27 @@ class FunctionCall < Expression
   end
 
   def evaluate(state = {})
+    state[@fun_name].evaluate_call(@arguments.map{ | argument | argument.evaluate() })
   end
 
   attr_reader :fun_name
   attr_reader :arguments
+end
+
+class FunctionImpl
+  def initialize(name)
+    @name = name
+  end
+  def evaluate_call(args)
+    throw "#{self.class.name}.evaluate_call() is not implemented!"
+  end
+end
+
+class FunctionHi < FunctionImpl
+  def initialize()
+    super('hi')
+  end
+  def evaluate_call(args)
+    puts "Hi"
+  end
 end

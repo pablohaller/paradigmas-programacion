@@ -2,13 +2,21 @@ require_relative 'test'
 require_relative 'expressions'
 require_relative 'statements'
 require_relative 'parser'
+require_relative 'functions'
 
 puts "Welcome to Rubynterpreter."
 puts "Finish your code with an empty line to process it."
 puts ""
 parser = Parser.new
 input = []
-state = { "hi" => FunctionHi.new() }
+state = { "hi" => FunctionHi.new(),
+          "max" => FunctionMax.new(),
+          "min" => FunctionMin.new(),
+          "abs" => FunctionAbs.new(),
+          "rand" => FunctionRand.new(),
+          "pow" => FunctionPow.new(),
+          "pi" => FunctionPi.new()
+        }
 
 Test.tests.map do |n|
   puts "Test:"
@@ -16,7 +24,7 @@ Test.tests.map do |n|
   puts "\nResult:\n"
   ast = parser.parse_string(n)
   puts ast.unparse
-  # puts ast.evaluate(state)
+  puts ast.evaluate(state)
   puts "\n--------------"
 end
 
@@ -29,7 +37,7 @@ ARGF.each do |line|
     else
       begin
         ast = parser.parse_string(code)
-        # puts ast.unparse()
+         puts ast.unparse()
          puts ast.evaluate(state)
       rescue => error
         STDERR.puts "#{error.class}: #{error.message}"

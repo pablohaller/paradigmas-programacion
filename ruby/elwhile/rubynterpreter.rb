@@ -8,7 +8,7 @@ puts "Finish your code with an empty line to process it."
 puts ""
 parser = Parser.new
 input = []
-state = {}
+state = { "hi" => FunctionHi.new() }
 
 Test.tests.map do |n|
   puts "Test:"
@@ -29,8 +29,8 @@ ARGF.each do |line|
     else
       begin
         ast = parser.parse_string(code)
-        puts ast.unparse()
-        # puts ast.evaluate(state)
+        # puts ast.unparse()
+         puts ast.evaluate(state)
       rescue => error
         STDERR.puts "#{error.class}: #{error.message}"
       ensure

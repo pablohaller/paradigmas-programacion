@@ -1,4 +1,4 @@
-state 74 contains 1 shift/reduce conflicts
+state 80 contains 1 shift/reduce conflicts
 
 
 -------- Grammar --------
@@ -13,105 +13,114 @@ rule 7 stmt: "if" "(" exp ")" stmt
 rule 8 stmt: "while" "(" exp ")" stmt
 rule 9 stmt: "do" stmt "until" "(" exp ")"
 rule 10 stmt: "print" "(" exp ")" ";"
-rule 11 stmts: stmt
-rule 12 stmts: stmts stmt
-rule 13 exp: ID
-rule 14 exp: NUM
-rule 15 exp: BOOL
-rule 16 exp: "-" exp
-rule 17 exp: "!" exp
-rule 18 exp: exp "+" exp
-rule 19 exp: exp "-" exp
-rule 20 exp: exp "*" exp
-rule 21 exp: exp "/" exp
-rule 22 exp: exp "==" exp
-rule 23 exp: exp "!=" exp
-rule 24 exp: exp "<" exp
-rule 25 exp: exp "<=" exp
-rule 26 exp: exp ">" exp
-rule 27 exp: exp ">=" exp
-rule 28 exp: exp "&&" exp
-rule 29 exp: exp "||" exp
-rule 30 exp: "(" exp ")"
-rule 31 exp: ID "(" ")"
-rule 32 exp: ID "(" args ")"
-rule 33 args: exp
-rule 34 args: args "," exp
+rule 11 stmt: "function" ID "(" ids ")" "{" stmts "}"
+rule 12 stmt: "function" ID "(" ")" "{" stmts "}"
+rule 13 ids: ID
+rule 14 ids: ids "," ID
+rule 15 stmts: stmt
+rule 16 stmts: stmts stmt
+rule 17 exp: ID
+rule 18 exp: NUM
+rule 19 exp: BOOL
+rule 20 exp: "-" exp
+rule 21 exp: "!" exp
+rule 22 exp: exp "+" exp
+rule 23 exp: exp "-" exp
+rule 24 exp: exp "*" exp
+rule 25 exp: exp "/" exp
+rule 26 exp: exp "==" exp
+rule 27 exp: exp "!=" exp
+rule 28 exp: exp "<" exp
+rule 29 exp: exp "<=" exp
+rule 30 exp: exp ">" exp
+rule 31 exp: exp ">=" exp
+rule 32 exp: exp "&&" exp
+rule 33 exp: exp "||" exp
+rule 34 exp: "(" exp ")"
+rule 35 exp: ID "(" ")"
+rule 36 exp: ID "(" args ")"
+rule 37 args: exp
+rule 38 args: args "," exp
 
 ------- Symbols -------
 
 **Nonterminals, with rules where they appear
 
-  $start (32)
+  $start (33)
     on right: 
     on left : 
-  target (33)
+  target (34)
     on right: 
     on left : 1 2
-  stmt (34)
-    on right: 1 6 7 8 9 11 12
-    on left : 3 4 5 6 7 8 9 10
-  exp (35)
-    on right: 2 3 6 7 8 9 10 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 33 34
-    on left : 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32
-  stmts (36)
-    on right: 4 12
-    on left : 11 12
-  args (37)
-    on right: 32 34
-    on left : 33 34
+  stmt (35)
+    on right: 1 6 7 8 9 15 16
+    on left : 3 4 5 6 7 8 9 10 11 12
+  exp (36)
+    on right: 2 3 6 7 8 9 10 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 37 38
+    on left : 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36
+  stmts (37)
+    on right: 4 11 12 16
+    on left : 15 16
+  ids (38)
+    on right: 11 14
+    on left : 13 14
+  args (39)
+    on right: 36 38
+    on left : 37 38
 
 **Terminals, with rules where they appear
 
   $end (0) 
   error (1) 
-  "||" (2) 29
-  "&&" (3) 28
-  "==" (4) 22
-  "!=" (5) 23
-  "<" (6) 24
-  "<=" (7) 25
-  ">" (8) 26
-  ">=" (9) 27
-  "*" (10) 20
-  "/" (11) 21
-  "+" (12) 18
-  "-" (13) 16 19
+  "||" (2) 33
+  "&&" (3) 32
+  "==" (4) 26
+  "!=" (5) 27
+  "<" (6) 28
+  "<=" (7) 29
+  ">" (8) 30
+  ">=" (9) 31
+  "*" (10) 24
+  "/" (11) 25
+  "+" (12) 22
+  "-" (13) 20 23
   UMINUS (14) 
-  "!" (15) 17
-  ID (16) 3 13 31 32
+  "!" (15) 21
+  ID (16) 3 11 12 13 14 17 35 36
   "=" (17) 3
   ";" (18) 3 10
-  "{" (19) 4 5
-  "}" (20) 4 5
+  "{" (19) 4 5 11 12
+  "}" (20) 4 5 11 12
   "if" (21) 6 7
-  "(" (22) 6 7 8 9 10 30 31 32
-  ")" (23) 6 7 8 9 10 30 31 32
+  "(" (22) 6 7 8 9 10 11 12 34 35 36
+  ")" (23) 6 7 8 9 10 11 12 34 35 36
   "else" (24) 6
   "while" (25) 8
   "do" (26) 9
   "until" (27) 9
   "print" (28) 10
-  NUM (29) 14
-  BOOL (30) 15
-  "," (31) 34
+  "function" (29) 11 12
+  "," (30) 14 38
+  NUM (31) 18
+  BOOL (32) 19
 
 --------- State ---------
 
 state 0
 
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
   ID            shift, and go to state 4
   "{"           shift, and go to state 5
   "if"          shift, and go to state 6
-  "("           shift, and go to state 14
+  "("           shift, and go to state 15
   "while"       shift, and go to state 7
   "do"          shift, and go to state 8
   "print"       shift, and go to state 9
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "function"    shift, and go to state 10
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   target        go to state 1
   stmt          go to state 2
@@ -120,7 +129,7 @@ state 0
 state 1
 
 
-  $end          shift, and go to state 15
+  $end          shift, and go to state 16
 
 
 state 2
@@ -133,44 +142,44 @@ state 2
 state 3
 
    2) target : exp _
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  "+"           shift, and go to state 16
-  "-"           shift, and go to state 17
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  "+"           shift, and go to state 17
+  "-"           shift, and go to state 18
   $default      reduce using rule 2 (target)
 
 
 state 4
 
    3) stmt : ID _ "=" exp ";"
-  13) exp : ID _
-  31) exp : ID _ "(" ")"
-  32) exp : ID _ "(" args ")"
+  17) exp : ID _
+  35) exp : ID _ "(" ")"
+  36) exp : ID _ "(" args ")"
 
-  "="           shift, and go to state 28
-  "("           shift, and go to state 29
-  $default      reduce using rule 13 (exp)
+  "="           shift, and go to state 29
+  "("           shift, and go to state 30
+  $default      reduce using rule 17 (exp)
 
 
 state 5
@@ -178,726 +187,637 @@ state 5
    4) stmt : "{" _ stmts "}"
    5) stmt : "{" _ "}"
 
-  ID            shift, and go to state 30
+  ID            shift, and go to state 31
   "{"           shift, and go to state 5
-  "}"           shift, and go to state 32
+  "}"           shift, and go to state 33
   "if"          shift, and go to state 6
   "while"       shift, and go to state 7
   "do"          shift, and go to state 8
   "print"       shift, and go to state 9
+  "function"    shift, and go to state 10
 
-  stmts         go to state 31
-  stmt          go to state 33
+  stmts         go to state 32
+  stmt          go to state 34
 
 state 6
 
    6) stmt : "if" _ "(" exp ")" stmt "else" stmt
    7) stmt : "if" _ "(" exp ")" stmt
 
-  "("           shift, and go to state 34
+  "("           shift, and go to state 35
 
 
 state 7
 
    8) stmt : "while" _ "(" exp ")" stmt
 
-  "("           shift, and go to state 35
+  "("           shift, and go to state 36
 
 
 state 8
 
    9) stmt : "do" _ stmt "until" "(" exp ")"
 
-  ID            shift, and go to state 30
+  ID            shift, and go to state 31
   "{"           shift, and go to state 5
   "if"          shift, and go to state 6
   "while"       shift, and go to state 7
   "do"          shift, and go to state 8
   "print"       shift, and go to state 9
+  "function"    shift, and go to state 10
 
-  stmt          go to state 36
+  stmt          go to state 37
 
 state 9
 
   10) stmt : "print" _ "(" exp ")" ";"
 
-  "("           shift, and go to state 37
+  "("           shift, and go to state 38
 
 
 state 10
 
-  14) exp : NUM _
+  11) stmt : "function" _ ID "(" ids ")" "{" stmts "}"
+  12) stmt : "function" _ ID "(" ")" "{" stmts "}"
 
-  $default      reduce using rule 14 (exp)
+  ID            shift, and go to state 39
 
 
 state 11
 
-  15) exp : BOOL _
+  18) exp : NUM _
 
-  $default      reduce using rule 15 (exp)
+  $default      reduce using rule 18 (exp)
 
 
 state 12
 
-  16) exp : "-" _ exp
+  19) exp : BOOL _
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  $default      reduce using rule 19 (exp)
 
-  exp           go to state 39
 
 state 13
 
-  17) exp : "!" _ exp
+  20) exp : "-" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
-
-  exp           go to state 40
-
-state 14
-
-  30) exp : "(" _ exp ")"
-
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 41
 
+state 14
+
+  21) exp : "!" _ exp
+
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
+
+  exp           go to state 42
+
 state 15
 
+  34) exp : "(" _ exp ")"
 
-  $end          shift, and go to state 42
-
-
-state 16
-
-  18) exp : exp "+" _ exp
-
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 43
 
+state 16
+
+
+  $end          shift, and go to state 44
+
+
 state 17
 
-  19) exp : exp "-" _ exp
+  22) exp : exp "+" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
-
-  exp           go to state 44
-
-state 18
-
-  20) exp : exp "*" _ exp
-
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 45
 
-state 19
+state 18
 
-  21) exp : exp "/" _ exp
+  23) exp : exp "-" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 46
 
-state 20
+state 19
 
-  22) exp : exp "==" _ exp
+  24) exp : exp "*" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 47
 
-state 21
+state 20
 
-  23) exp : exp "!=" _ exp
+  25) exp : exp "/" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 48
 
-state 22
+state 21
 
-  24) exp : exp "<" _ exp
+  26) exp : exp "==" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 49
 
-state 23
+state 22
 
-  25) exp : exp "<=" _ exp
+  27) exp : exp "!=" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 50
 
-state 24
+state 23
 
-  26) exp : exp ">" _ exp
+  28) exp : exp "<" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 51
 
-state 25
+state 24
 
-  27) exp : exp ">=" _ exp
+  29) exp : exp "<=" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 52
 
-state 26
+state 25
 
-  28) exp : exp "&&" _ exp
+  30) exp : exp ">" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 53
 
-state 27
+state 26
 
-  29) exp : exp "||" _ exp
+  31) exp : exp ">=" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 54
 
-state 28
+state 27
 
-   3) stmt : ID "=" _ exp ";"
+  32) exp : exp "&&" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 55
 
-state 29
+state 28
 
-  31) exp : ID "(" _ ")"
-  32) exp : ID "(" _ args ")"
+  33) exp : exp "||" _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  ")"           shift, and go to state 57
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 56
-  args          go to state 58
+
+state 29
+
+   3) stmt : ID "=" _ exp ";"
+
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
+
+  exp           go to state 57
 
 state 30
 
-   3) stmt : ID _ "=" exp ";"
+  35) exp : ID "(" _ ")"
+  36) exp : ID "(" _ args ")"
 
-  "="           shift, and go to state 28
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  ")"           shift, and go to state 59
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
+  exp           go to state 58
+  args          go to state 60
 
 state 31
 
-   4) stmt : "{" stmts _ "}"
-  12) stmts : stmts _ stmt
+   3) stmt : ID _ "=" exp ";"
 
-  ID            shift, and go to state 30
+  "="           shift, and go to state 29
+
+
+state 32
+
+   4) stmt : "{" stmts _ "}"
+  16) stmts : stmts _ stmt
+
+  ID            shift, and go to state 31
   "{"           shift, and go to state 5
-  "}"           shift, and go to state 59
+  "}"           shift, and go to state 61
   "if"          shift, and go to state 6
   "while"       shift, and go to state 7
   "do"          shift, and go to state 8
   "print"       shift, and go to state 9
+  "function"    shift, and go to state 10
 
-  stmt          go to state 60
+  stmt          go to state 62
 
-state 32
+state 33
 
    5) stmt : "{" "}" _
 
   $default      reduce using rule 5 (stmt)
 
 
-state 33
-
-  11) stmts : stmt _
-
-  $default      reduce using rule 11 (stmts)
-
-
 state 34
+
+  15) stmts : stmt _
+
+  $default      reduce using rule 15 (stmts)
+
+
+state 35
 
    6) stmt : "if" "(" _ exp ")" stmt "else" stmt
    7) stmt : "if" "(" _ exp ")" stmt
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
-  exp           go to state 61
-
-state 35
-
-   8) stmt : "while" "(" _ exp ")" stmt
-
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
-
-  exp           go to state 62
+  exp           go to state 63
 
 state 36
 
-   9) stmt : "do" stmt _ "until" "(" exp ")"
+   8) stmt : "while" "(" _ exp ")" stmt
 
-  "until"       shift, and go to state 63
-
-
-state 37
-
-  10) stmt : "print" "(" _ exp ")" ";"
-
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
   exp           go to state 64
 
+state 37
+
+   9) stmt : "do" stmt _ "until" "(" exp ")"
+
+  "until"       shift, and go to state 65
+
+
 state 38
 
-  13) exp : ID _
-  31) exp : ID _ "(" ")"
-  32) exp : ID _ "(" args ")"
+  10) stmt : "print" "(" _ exp ")" ";"
 
-  "("           shift, and go to state 29
-  $default      reduce using rule 13 (exp)
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
+  exp           go to state 66
 
 state 39
 
-  16) exp : "-" exp _
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  11) stmt : "function" ID _ "(" ids ")" "{" stmts "}"
+  12) stmt : "function" ID _ "(" ")" "{" stmts "}"
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  "+"           shift, and go to state 16
-  "-"           shift, and go to state 17
-  $default      reduce using rule 16 (exp)
+  "("           shift, and go to state 67
 
 
 state 40
 
-  17) exp : "!" exp _
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  17) exp : ID _
+  35) exp : ID _ "(" ")"
+  36) exp : ID _ "(" args ")"
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  "+"           shift, and go to state 16
-  "-"           shift, and go to state 17
+  "("           shift, and go to state 30
   $default      reduce using rule 17 (exp)
 
 
 state 41
 
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
-  30) exp : "(" exp _ ")"
+  20) exp : "-" exp _
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  "+"           shift, and go to state 16
-  "-"           shift, and go to state 17
-  ")"           shift, and go to state 65
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  "+"           shift, and go to state 17
+  "-"           shift, and go to state 18
+  $default      reduce using rule 20 (exp)
 
 
 state 42
+
+  21) exp : "!" exp _
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
+
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  "+"           shift, and go to state 17
+  "-"           shift, and go to state 18
+  $default      reduce using rule 21 (exp)
+
+
+state 43
+
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
+  34) exp : "(" exp _ ")"
+
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  "+"           shift, and go to state 17
+  "-"           shift, and go to state 18
+  ")"           shift, and go to state 68
+
+
+state 44
 
 
   $default      accept
 
 
-state 43
-
-  18) exp : exp _ "+" exp
-  18) exp : exp "+" exp _
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
-
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  $default      reduce using rule 18 (exp)
-
-
-state 44
-
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  19) exp : exp "-" exp _
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
-
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  $default      reduce using rule 19 (exp)
-
-
 state 45
 
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  20) exp : exp "*" exp _
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  22) exp : exp _ "+" exp
+  22) exp : exp "+" exp _
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  $default      reduce using rule 20 (exp)
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  $default      reduce using rule 22 (exp)
 
 
 state 46
 
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  21) exp : exp "/" exp _
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  23) exp : exp "-" exp _
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  $default      reduce using rule 21 (exp)
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  $default      reduce using rule 23 (exp)
 
 
 state 47
 
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  22) exp : exp "==" exp _
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  24) exp : exp "*" exp _
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          error
-  "!="          error
-  "<"           error
-  "<="          error
-  ">"           error
-  ">="          error
-  $default      reduce using rule 22 (exp)
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  $default      reduce using rule 24 (exp)
 
 
 state 48
 
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  23) exp : exp "!=" exp _
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  25) exp : exp "/" exp _
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          error
-  "!="          error
-  "<"           error
-  "<="          error
-  ">"           error
-  ">="          error
-  $default      reduce using rule 23 (exp)
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  $default      reduce using rule 25 (exp)
 
 
 state 49
 
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  24) exp : exp "<" exp _
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  26) exp : exp "==" exp _
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          error
-  "!="          error
-  "<"           error
-  "<="          error
-  ">"           error
-  ">="          error
-  $default      reduce using rule 24 (exp)
-
-
-state 50
-
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  25) exp : exp "<=" exp _
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
-
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          error
-  "!="          error
-  "<"           error
-  "<="          error
-  ">"           error
-  ">="          error
-  $default      reduce using rule 25 (exp)
-
-
-state 51
-
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  26) exp : exp ">" exp _
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
-
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
   "=="          error
   "!="          error
   "<"           error
@@ -907,24 +827,24 @@ state 51
   $default      reduce using rule 26 (exp)
 
 
-state 52
+state 50
 
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  27) exp : exp ">=" exp _
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  27) exp : exp "!=" exp _
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
   "=="          error
   "!="          error
   "<"           error
@@ -934,428 +854,669 @@ state 52
   $default      reduce using rule 27 (exp)
 
 
+state 51
+
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  28) exp : exp "<" exp _
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
+
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          error
+  "!="          error
+  "<"           error
+  "<="          error
+  ">"           error
+  ">="          error
+  $default      reduce using rule 28 (exp)
+
+
+state 52
+
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  29) exp : exp "<=" exp _
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
+
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          error
+  "!="          error
+  "<"           error
+  "<="          error
+  ">"           error
+  ">="          error
+  $default      reduce using rule 29 (exp)
+
+
 state 53
 
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  28) exp : exp "&&" exp _
-  29) exp : exp _ "||" exp
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  30) exp : exp ">" exp _
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  $default      reduce using rule 28 (exp)
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          error
+  "!="          error
+  "<"           error
+  "<="          error
+  ">"           error
+  ">="          error
+  $default      reduce using rule 30 (exp)
 
 
 state 54
 
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
-  29) exp : exp "||" exp _
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  31) exp : exp ">=" exp _
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  $default      reduce using rule 29 (exp)
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          error
+  "!="          error
+  "<"           error
+  "<="          error
+  ">"           error
+  ">="          error
+  $default      reduce using rule 31 (exp)
 
 
 state 55
 
-   3) stmt : ID "=" exp _ ";"
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  32) exp : exp "&&" exp _
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  "+"           shift, and go to state 16
-  "-"           shift, and go to state 17
-  ";"           shift, and go to state 66
+  "||"          shift, and go to state 28
+  $default      reduce using rule 32 (exp)
 
 
 state 56
 
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
-  33) args : exp _
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
+  33) exp : exp "||" exp _
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  "+"           shift, and go to state 16
-  "-"           shift, and go to state 17
-  $default      reduce using rule 33 (args)
+  $default      reduce using rule 33 (exp)
 
 
 state 57
 
-  31) exp : ID "(" ")" _
+   3) stmt : ID "=" exp _ ";"
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  $default      reduce using rule 31 (exp)
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  "+"           shift, and go to state 17
+  "-"           shift, and go to state 18
+  ";"           shift, and go to state 69
 
 
 state 58
 
-  32) exp : ID "(" args _ ")"
-  34) args : args _ "," exp
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
+  37) args : exp _
 
-  ")"           shift, and go to state 67
-  ","           shift, and go to state 68
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  "+"           shift, and go to state 17
+  "-"           shift, and go to state 18
+  $default      reduce using rule 37 (args)
 
 
 state 59
+
+  35) exp : ID "(" ")" _
+
+  $default      reduce using rule 35 (exp)
+
+
+state 60
+
+  36) exp : ID "(" args _ ")"
+  38) args : args _ "," exp
+
+  ")"           shift, and go to state 70
+  ","           shift, and go to state 71
+
+
+state 61
 
    4) stmt : "{" stmts "}" _
 
   $default      reduce using rule 4 (stmt)
 
 
-state 60
-
-  12) stmts : stmts stmt _
-
-  $default      reduce using rule 12 (stmts)
-
-
-state 61
-
-   6) stmt : "if" "(" exp _ ")" stmt "else" stmt
-   7) stmt : "if" "(" exp _ ")" stmt
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
-
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  "+"           shift, and go to state 16
-  "-"           shift, and go to state 17
-  ")"           shift, and go to state 69
-
-
 state 62
 
-   8) stmt : "while" "(" exp _ ")" stmt
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  16) stmts : stmts stmt _
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  "+"           shift, and go to state 16
-  "-"           shift, and go to state 17
-  ")"           shift, and go to state 70
+  $default      reduce using rule 16 (stmts)
 
 
 state 63
 
-   9) stmt : "do" stmt "until" _ "(" exp ")"
+   6) stmt : "if" "(" exp _ ")" stmt "else" stmt
+   7) stmt : "if" "(" exp _ ")" stmt
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "("           shift, and go to state 71
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  "+"           shift, and go to state 17
+  "-"           shift, and go to state 18
+  ")"           shift, and go to state 72
 
 
 state 64
 
-  10) stmt : "print" "(" exp _ ")" ";"
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+   8) stmt : "while" "(" exp _ ")" stmt
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  "+"           shift, and go to state 16
-  "-"           shift, and go to state 17
-  ")"           shift, and go to state 72
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  "+"           shift, and go to state 17
+  "-"           shift, and go to state 18
+  ")"           shift, and go to state 73
 
 
 state 65
 
-  30) exp : "(" exp ")" _
+   9) stmt : "do" stmt "until" _ "(" exp ")"
 
-  $default      reduce using rule 30 (exp)
+  "("           shift, and go to state 74
 
 
 state 66
+
+  10) stmt : "print" "(" exp _ ")" ";"
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
+
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  "+"           shift, and go to state 17
+  "-"           shift, and go to state 18
+  ")"           shift, and go to state 75
+
+
+state 67
+
+  11) stmt : "function" ID "(" _ ids ")" "{" stmts "}"
+  12) stmt : "function" ID "(" _ ")" "{" stmts "}"
+
+  ID            shift, and go to state 78
+  ")"           shift, and go to state 77
+
+  ids           go to state 76
+
+state 68
+
+  34) exp : "(" exp ")" _
+
+  $default      reduce using rule 34 (exp)
+
+
+state 69
 
    3) stmt : ID "=" exp ";" _
 
   $default      reduce using rule 3 (stmt)
 
 
-state 67
+state 70
 
-  32) exp : ID "(" args ")" _
+  36) exp : ID "(" args ")" _
 
-  $default      reduce using rule 32 (exp)
+  $default      reduce using rule 36 (exp)
 
 
-state 68
+state 71
 
-  34) args : args "," _ exp
+  38) args : args "," _ exp
 
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
 
-  exp           go to state 73
+  exp           go to state 79
 
-state 69
+state 72
 
    6) stmt : "if" "(" exp ")" _ stmt "else" stmt
    7) stmt : "if" "(" exp ")" _ stmt
 
-  ID            shift, and go to state 30
+  ID            shift, and go to state 31
   "{"           shift, and go to state 5
   "if"          shift, and go to state 6
   "while"       shift, and go to state 7
   "do"          shift, and go to state 8
   "print"       shift, and go to state 9
+  "function"    shift, and go to state 10
 
-  stmt          go to state 74
-
-state 70
-
-   8) stmt : "while" "(" exp ")" _ stmt
-
-  ID            shift, and go to state 30
-  "{"           shift, and go to state 5
-  "if"          shift, and go to state 6
-  "while"       shift, and go to state 7
-  "do"          shift, and go to state 8
-  "print"       shift, and go to state 9
-
-  stmt          go to state 75
-
-state 71
-
-   9) stmt : "do" stmt "until" "(" _ exp ")"
-
-  "-"           shift, and go to state 12
-  "!"           shift, and go to state 13
-  ID            shift, and go to state 38
-  "("           shift, and go to state 14
-  NUM           shift, and go to state 10
-  BOOL          shift, and go to state 11
-
-  exp           go to state 76
-
-state 72
-
-  10) stmt : "print" "(" exp ")" _ ";"
-
-  ";"           shift, and go to state 77
-
+  stmt          go to state 80
 
 state 73
 
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
-  34) args : args "," exp _
+   8) stmt : "while" "(" exp ")" _ stmt
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  "+"           shift, and go to state 16
-  "-"           shift, and go to state 17
-  $default      reduce using rule 34 (args)
+  ID            shift, and go to state 31
+  "{"           shift, and go to state 5
+  "if"          shift, and go to state 6
+  "while"       shift, and go to state 7
+  "do"          shift, and go to state 8
+  "print"       shift, and go to state 9
+  "function"    shift, and go to state 10
 
+  stmt          go to state 81
 
 state 74
+
+   9) stmt : "do" stmt "until" "(" _ exp ")"
+
+  "-"           shift, and go to state 13
+  "!"           shift, and go to state 14
+  ID            shift, and go to state 40
+  "("           shift, and go to state 15
+  NUM           shift, and go to state 11
+  BOOL          shift, and go to state 12
+
+  exp           go to state 82
+
+state 75
+
+  10) stmt : "print" "(" exp ")" _ ";"
+
+  ";"           shift, and go to state 83
+
+
+state 76
+
+  11) stmt : "function" ID "(" ids _ ")" "{" stmts "}"
+  14) ids : ids _ "," ID
+
+  ")"           shift, and go to state 84
+  ","           shift, and go to state 85
+
+
+state 77
+
+  12) stmt : "function" ID "(" ")" _ "{" stmts "}"
+
+  "{"           shift, and go to state 86
+
+
+state 78
+
+  13) ids : ID _
+
+  $default      reduce using rule 13 (ids)
+
+
+state 79
+
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
+  38) args : args "," exp _
+
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  "+"           shift, and go to state 17
+  "-"           shift, and go to state 18
+  $default      reduce using rule 38 (args)
+
+
+state 80
 
    6) stmt : "if" "(" exp ")" stmt _ "else" stmt
    7) stmt : "if" "(" exp ")" stmt _
 
-  "else"        shift, and go to state 78
+  "else"        shift, and go to state 87
   "else"        [reduce using rule 7 (stmt)]
   $default      reduce using rule 7 (stmt)
 
 
-state 75
+state 81
 
    8) stmt : "while" "(" exp ")" stmt _
 
   $default      reduce using rule 8 (stmt)
 
 
-state 76
+state 82
 
    9) stmt : "do" stmt "until" "(" exp _ ")"
-  18) exp : exp _ "+" exp
-  19) exp : exp _ "-" exp
-  20) exp : exp _ "*" exp
-  21) exp : exp _ "/" exp
-  22) exp : exp _ "==" exp
-  23) exp : exp _ "!=" exp
-  24) exp : exp _ "<" exp
-  25) exp : exp _ "<=" exp
-  26) exp : exp _ ">" exp
-  27) exp : exp _ ">=" exp
-  28) exp : exp _ "&&" exp
-  29) exp : exp _ "||" exp
+  22) exp : exp _ "+" exp
+  23) exp : exp _ "-" exp
+  24) exp : exp _ "*" exp
+  25) exp : exp _ "/" exp
+  26) exp : exp _ "==" exp
+  27) exp : exp _ "!=" exp
+  28) exp : exp _ "<" exp
+  29) exp : exp _ "<=" exp
+  30) exp : exp _ ">" exp
+  31) exp : exp _ ">=" exp
+  32) exp : exp _ "&&" exp
+  33) exp : exp _ "||" exp
 
-  "||"          shift, and go to state 27
-  "&&"          shift, and go to state 26
-  "=="          shift, and go to state 20
-  "!="          shift, and go to state 21
-  "<"           shift, and go to state 22
-  "<="          shift, and go to state 23
-  ">"           shift, and go to state 24
-  ">="          shift, and go to state 25
-  "*"           shift, and go to state 18
-  "/"           shift, and go to state 19
-  "+"           shift, and go to state 16
-  "-"           shift, and go to state 17
-  ")"           shift, and go to state 79
+  "||"          shift, and go to state 28
+  "&&"          shift, and go to state 27
+  "=="          shift, and go to state 21
+  "!="          shift, and go to state 22
+  "<"           shift, and go to state 23
+  "<="          shift, and go to state 24
+  ">"           shift, and go to state 25
+  ">="          shift, and go to state 26
+  "*"           shift, and go to state 19
+  "/"           shift, and go to state 20
+  "+"           shift, and go to state 17
+  "-"           shift, and go to state 18
+  ")"           shift, and go to state 88
 
 
-state 77
+state 83
 
   10) stmt : "print" "(" exp ")" ";" _
 
   $default      reduce using rule 10 (stmt)
 
 
-state 78
+state 84
 
-   6) stmt : "if" "(" exp ")" stmt "else" _ stmt
+  11) stmt : "function" ID "(" ids ")" _ "{" stmts "}"
 
-  ID            shift, and go to state 30
+  "{"           shift, and go to state 89
+
+
+state 85
+
+  14) ids : ids "," _ ID
+
+  ID            shift, and go to state 90
+
+
+state 86
+
+  12) stmt : "function" ID "(" ")" "{" _ stmts "}"
+
+  ID            shift, and go to state 31
   "{"           shift, and go to state 5
   "if"          shift, and go to state 6
   "while"       shift, and go to state 7
   "do"          shift, and go to state 8
   "print"       shift, and go to state 9
+  "function"    shift, and go to state 10
 
-  stmt          go to state 80
+  stmts         go to state 91
+  stmt          go to state 34
 
-state 79
+state 87
+
+   6) stmt : "if" "(" exp ")" stmt "else" _ stmt
+
+  ID            shift, and go to state 31
+  "{"           shift, and go to state 5
+  "if"          shift, and go to state 6
+  "while"       shift, and go to state 7
+  "do"          shift, and go to state 8
+  "print"       shift, and go to state 9
+  "function"    shift, and go to state 10
+
+  stmt          go to state 92
+
+state 88
 
    9) stmt : "do" stmt "until" "(" exp ")" _
 
   $default      reduce using rule 9 (stmt)
 
 
-state 80
+state 89
+
+  11) stmt : "function" ID "(" ids ")" "{" _ stmts "}"
+
+  ID            shift, and go to state 31
+  "{"           shift, and go to state 5
+  "if"          shift, and go to state 6
+  "while"       shift, and go to state 7
+  "do"          shift, and go to state 8
+  "print"       shift, and go to state 9
+  "function"    shift, and go to state 10
+
+  stmts         go to state 93
+  stmt          go to state 34
+
+state 90
+
+  14) ids : ids "," ID _
+
+  $default      reduce using rule 14 (ids)
+
+
+state 91
+
+  12) stmt : "function" ID "(" ")" "{" stmts _ "}"
+  16) stmts : stmts _ stmt
+
+  ID            shift, and go to state 31
+  "{"           shift, and go to state 5
+  "}"           shift, and go to state 94
+  "if"          shift, and go to state 6
+  "while"       shift, and go to state 7
+  "do"          shift, and go to state 8
+  "print"       shift, and go to state 9
+  "function"    shift, and go to state 10
+
+  stmt          go to state 62
+
+state 92
 
    6) stmt : "if" "(" exp ")" stmt "else" stmt _
 
   $default      reduce using rule 6 (stmt)
+
+
+state 93
+
+  11) stmt : "function" ID "(" ids ")" "{" stmts _ "}"
+  16) stmts : stmts _ stmt
+
+  ID            shift, and go to state 31
+  "{"           shift, and go to state 5
+  "}"           shift, and go to state 95
+  "if"          shift, and go to state 6
+  "while"       shift, and go to state 7
+  "do"          shift, and go to state 8
+  "print"       shift, and go to state 9
+  "function"    shift, and go to state 10
+
+  stmt          go to state 62
+
+state 94
+
+  12) stmt : "function" ID "(" ")" "{" stmts "}" _
+
+  $default      reduce using rule 12 (stmt)
+
+
+state 95
+
+  11) stmt : "function" ID "(" ids ")" "{" stmts "}" _
+
+  $default      reduce using rule 11 (stmt)
 

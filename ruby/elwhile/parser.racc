@@ -35,7 +35,12 @@ rule
       { DoUntil.new(val[1], val[4]) }
     | 'print' '(' exp ')' ';'
       { PrintStmt.new(val[2]) }
-
+    | 'function' ID '(' ids ')' '{' stmts '}'
+      { FunctionDecl.new(val[1], val[3], val[6]) }
+    | 'function' ID '(' ')' '{' stmts '}'
+      { FunctionDecl.new(val[1], [], val[5]) }
+  ids
+    : ID { [val[0]] } | ids ',' ID { val[0].push(val[2]) } ;
   stmts
     : stmt
       { [val[0]] }
@@ -99,7 +104,7 @@ require_relative 'statements'
 class Lexer
   NUMBER = /\d+(\.\d+)?/
   BOOL = /true|false/
-  KEYWORDS = /if|else|while|print|do|until/
+  KEYWORDS = /if|else|while|print|do|until|function/
   ID = /[a-zA-Z_]\w*/
   OPERS = /[-+*\/(){};,]|[!=<>]=?|&&|\|\|/
   IGNORE = /(\/\/.*(\n|$)|\s)+/

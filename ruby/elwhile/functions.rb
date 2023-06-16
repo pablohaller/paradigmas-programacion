@@ -93,7 +93,7 @@ end
 
 class FunctionDef < FunctionImpl
   def initialize(fun_name, arg_names, body)
-    @fun_name = fun_name
+    super(fun_name)
     @arg_names = arg_names
     @body = body
   end

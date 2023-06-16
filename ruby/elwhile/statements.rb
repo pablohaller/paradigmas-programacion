@@ -171,3 +171,22 @@ class PrintStmt < Statement
 
   attr_reader :expression
 end
+
+class FunctionDecl < Statement
+  def initialize(name, arg_names, body)
+    @name = name
+    @arg_names = arg_names
+    @body = body
+  end
+
+
+  def evaluate(state)
+    state[@name] = FunctionDef.new(@name, @arg_names, Block.new(@body))
+    puts state
+    state
+  end
+
+  attr_reader :name
+  attr_reader :arg_names
+  attr_reader :body
+end

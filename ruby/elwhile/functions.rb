@@ -90,3 +90,24 @@ class FunctionPi < FunctionImpl
     Math::PI
   end
 end
+
+class FunctionDef < FunctionImpl
+  def initialize(fun_name, arg_names, body)
+    @fun_name = fun_name
+    @arg_names = arg_names
+    @body = body
+  end
+
+  def evaluate_call(arg_values)
+    fun_state = {}
+    @arg_names.zip(arg_values).each do | key_value_pair |
+      fun_state[key_value_pair[0]] = key_value_pair[1]
+    end
+    new_state = @body.evaluate(fun_state)
+    new_state["result"]
+  end
+
+  attr_reader :fun_name
+  attr_reader :arguments
+  attr_reader :body
+end

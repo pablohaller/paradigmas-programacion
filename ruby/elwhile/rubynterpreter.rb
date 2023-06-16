@@ -9,10 +9,12 @@ puts "Finish your code with an empty line to process it."
 puts ""
 parser = Parser.new
 input = []
-state = { "hi" => FunctionHi.new(),
+state = {
+          "hi" => FunctionHi.new(),
           "max" => FunctionMax.new(),
           "min" => FunctionMin.new(),
-          "abs" => FunctionAbs.new(),
+          # "abs" => FunctionAbs.new(),
+          "abs" => FunctionDef.new('abs', ['x'], parser.parse_string("if (x < 0) { result = x * -1; } else { result = x; }")),
           "rand" => FunctionRand.new(),
           "pow" => FunctionPow.new(),
           "pi" => FunctionPi.new()
@@ -49,3 +51,5 @@ ARGF.each do |line|
     input << line
   end
 end
+
+# if (x < 0) { result = x * -1; } else { result = x; }

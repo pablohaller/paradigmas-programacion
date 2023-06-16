@@ -107,6 +107,10 @@ class FunctionDef < FunctionImpl
     new_state["result"]
   end
 
+  def unparse()
+    "function #{@name}  (#{@arg_names}) {#{@body.unparse()}}"
+  end
+
   attr_reader :fun_name
   attr_reader :arguments
   attr_reader :body

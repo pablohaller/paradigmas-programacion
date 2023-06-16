@@ -186,6 +186,11 @@ class FunctionDecl < Statement
     state
   end
 
+  def unparse()
+    "function #{@name}  (#{@arg_names}) {#{@body}}"
+  end
+
+
   attr_reader :name
   attr_reader :arg_names
   attr_reader :body

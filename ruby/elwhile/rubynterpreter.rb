@@ -39,7 +39,7 @@ ARGF.each do |line|
     else
       begin
         ast = parser.parse_string(code)
-         # puts ast.unparse()
+         puts ast.unparse()
          puts ast.evaluate(state)
       rescue => error
         STDERR.puts "#{error.class}: #{error.message}"
